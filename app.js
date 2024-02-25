@@ -1,5 +1,5 @@
 const express = require('express')
-const {opne} = require('sqlite')
+const { open } = require('sqlite')
 const sqlite3 = require('sqlite3')
 const path = require('path')
 const bcrypt = require('bcrypt')
@@ -41,7 +41,7 @@ app.post('/register', async (request, response) => {
 
   if (databaseUser !== undefined) {
     const createUserQuery = `
-        INSERT IN TO
+        INSERT INTO
             user(username, name, password, gender, location)
         VALUES
             (
