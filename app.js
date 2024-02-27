@@ -39,7 +39,7 @@ app.post('/register', async (request, response) => {
   const selectUserQuery = `SELECT * FROM user WHERE username = '${username}';`
   const databaseUser = await database.get(selectUserQuery)
 
-  if (databaseUser !== undefined) {
+  if (databaseUser === undefined) {
     const createUserQuery = `
         INSERT INTO
             user(username, name, password, gender, location)
@@ -69,7 +69,7 @@ app.post('/login', async (request, response) => {
   const selectUserQuery = `SELECT * FROM user WHERE username = '${username}';`
   const databaseUser = await database.get(selectUserQuery)
 
-  if (databaseUser !== undefined) {
+  if (databaseUser === undefined) {
     response.status(400)
     response.send('Invalid user')
   } else {
@@ -90,7 +90,7 @@ app.put('/change-password', async (request, response) => {
   const {username, oldPassword, newPassword} = request.body
   const selectUserQuery = `SELECT * FROM user WHERE username = '${username}';`
   const databaseUser = await database.get(selectUserQuery)
-  if (databaseUser !== undefined) {
+  if (databaseUser === undefined) {
     response.status(400)
     response.send('Invalid user')
   } else {
